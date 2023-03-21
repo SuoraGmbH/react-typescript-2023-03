@@ -1,6 +1,12 @@
 import { useArrayState } from "./useArrayState";
+import { TimeEntry } from "../types/TimeEntry";
 
-export const useTimeEntries = () => {
+interface UseTimeEntriesResult {
+  timeEntries: TimeEntry[];
+  logTime: (timeEntry: TimeEntry) => void;
+}
+
+export const useTimeEntries = (): UseTimeEntriesResult => {
   const [timeEntries, timeEntryModifiers] = useArrayState([
     {
       id: "394ec61d-741d-411a-bdc7-e5a9c5efe53d",
@@ -18,7 +24,7 @@ export const useTimeEntries = () => {
 
   return {
     timeEntries,
-    logTime: (timeEntry) => {
+    logTime: (timeEntry: TimeEntry) => {
       timeEntryModifiers.push(timeEntry);
     },
   };
