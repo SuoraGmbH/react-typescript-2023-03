@@ -2,7 +2,7 @@ import { TimeEntryList } from "../components/TimeEntryList";
 import { useTimeEntries } from "../hooks/useTimeEntries";
 import { TimeEntryForm } from "../components/TimeEntryForm";
 
-export const TimeEntryListPage = () => {
+export const TimeEntryListPage: React.FunctionComponent = () => {
   const { timeEntries, logTime } = useTimeEntries();
 
   return (
