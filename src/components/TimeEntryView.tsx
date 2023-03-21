@@ -1,8 +1,4 @@
-export interface TimeEntry {
-  comment: string;
-  start: Date;
-  end: Date;
-}
+import { TimeEntry } from "../types/TimeEntry";
 
 interface Props {
   timeEntry: TimeEntry;
