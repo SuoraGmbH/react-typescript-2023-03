@@ -1,13 +1,20 @@
 import { useArrayState } from "./useArrayState";
 import { TimeEntry } from "../types/TimeEntry";
+import { v4 } from "uuid";
+
+export interface NewTimeEntry {
+  comment: string;
+  start: Date;
+  end: Date;
+}
 
 interface UseTimeEntriesResult {
   timeEntries: TimeEntry[];
-  logTime: (timeEntry: TimeEntry) => void;
+  logTime: (timeEntry: NewTimeEntry) => void;
 }
 
 export const useTimeEntries = (): UseTimeEntriesResult => {
-  const [timeEntries, timeEntryModifiers] = useArrayState([
+  const [timeEntries, timeEntryModifiers] = useArrayState<TimeEntry>([
     {
       id: "394ec61d-741d-411a-bdc7-e5a9c5efe53d",
       comment: "My first time entry",
@@ -24,8 +31,11 @@ export const useTimeEntries = (): UseTimeEntriesResult => {
 
   return {
     timeEntries,
-    logTime: (timeEntry: TimeEntry) => {
-      timeEntryModifiers.push(timeEntry);
+    logTime: (timeEntry: NewTimeEntry) => {
+      timeEntryModifiers.push({
+        ...timeEntry,
+        id: v4(),
+      });
     },
   };
 };

@@ -1,10 +1,18 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputWithLabel } from "./InputWithLabel";
 import { Form } from "./Form";
+import { TimeEntry } from "../types/TimeEntry";
+import { NewTimeEntry } from "../hooks/useTimeEntries";
 
-const initialFormData = { comment: "", start: "", end: "" };
+interface FormData {
+  comment: string;
+  start: string;
+  end: string;
+}
 
-const isFormDataValid = (formData) => {
+const initialFormData: FormData = { comment: "", start: "", end: "" };
+
+const isFormDataValid = (formData: FormData) => {
   if (formData.comment === "") {
     return false;
   }
@@ -18,7 +26,13 @@ const isFormDataValid = (formData) => {
   return start <= end;
 };
 
-export const TimeEntryForm = ({ onLogTime }) => {
+interface Props {
+  onLogTime: (timeEntry: NewTimeEntry) => void;
+}
+
+export const TimeEntryForm: React.FunctionComponent<Props> = ({
+  onLogTime,
+}) => {
   const [formData, setFormData] = useState(initialFormData);
 
   const isValid = isFormDataValid(formData);
@@ -44,7 +58,7 @@ export const TimeEntryForm = ({ onLogTime }) => {
         label="Comment"
         type="text"
         value={formData.comment}
-        onChange={(event) => {
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setFormData((oldValue) => ({
             ...oldValue,
             comment: event.target.value,
@@ -55,7 +69,7 @@ export const TimeEntryForm = ({ onLogTime }) => {
         label="Start"
         type="datetime-local"
         value={formData.start}
-        onChange={(event) => {
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setFormData((oldValue) => ({
             ...oldValue,
             start: event.target.value,
@@ -66,7 +80,7 @@ export const TimeEntryForm = ({ onLogTime }) => {
         label="End"
         type="datetime-local"
         value={formData.end}
-        onChange={(event) => {
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setFormData((oldValue) => ({
             ...oldValue,
             end: event.target.value,
