@@ -9,9 +9,10 @@ export const Form: React.FunctionComponent<PropsWithChildren<Props>> = ({
   children,
   title,
   submitDisabled,
+  ...formProps
 }) => {
   return (
-    <form className="space-y-8 divide-y divide-gray-200 px-4">
+    <form className="space-y-8 divide-y divide-gray-200 px-4" {...formProps}>
       <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
           <div>
