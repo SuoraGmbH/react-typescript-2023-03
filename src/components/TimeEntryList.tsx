@@ -1,6 +1,13 @@
 import { TimeEntryView } from "./TimeEntryView";
+import { TimeEntry } from "../types/TimeEntry";
 
-export const TimeEntryList = ({ timeEntries }) => {
+interface Props {
+  timeEntries: TimeEntry[];
+}
+
+export const TimeEntryList: React.FunctionComponent<Props> = ({
+  timeEntries,
+}) => {
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-md">
       <ul className="divide-y divide-gray-200">
